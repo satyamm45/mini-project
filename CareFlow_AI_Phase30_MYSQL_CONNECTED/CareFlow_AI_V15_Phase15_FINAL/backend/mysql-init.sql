@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS careflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'careflow_app'@'%' IDENTIFIED BY 'CareFlow_Local_2026!';
+GRANT ALL PRIVILEGES ON careflow.* TO 'careflow_app'@'%';
+FLUSH PRIVILEGES;

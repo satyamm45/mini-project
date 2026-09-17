@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: careflow-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: CareFlowRoot_2026!
+      MYSQL_DATABASE: careflow
+      MYSQL_USER: careflow_app
+      MYSQL_PASSWORD: CareFlow_Local_2026!
+    ports:
+      - "3306:3306"
+    volumes:
+      - careflow_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "careflow_app", "-pCareFlow_Local_2026!"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: .
+    container_name: careflow-backend
+    restart: unless-stopped
+    environment:
+      CAREFLOW_DATABASE_URL: mysql+pymysql://careflow_app:CareFlow_Local_2026!@mysql:3306/careflow
+      CAREFLOW_JWT_SECRET: change-this-for-real-deployment
+      CAREFLOW_TOKEN_HOURS: 8
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  careflow_mysql_data:

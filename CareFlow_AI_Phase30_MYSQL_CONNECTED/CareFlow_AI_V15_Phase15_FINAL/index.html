@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareFlow AI — Integrated Digital Healthcare, Medical College & Hospital Management System</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body class="theme-light">
+<div id="app">
+  <section id="login-view" class="view-container active">
+    <div class="login-shell">
+      <div class="login-showcase">
+        <div class="showcase-grid-overlay"></div>
+        <div class="showcase-topline">
+          <div class="brand brand-light login-primary-brand">
+            <strong class="login-brand-name">CareFlow <span>AI</span></strong>
+          </div>
+          <div class="login-top-right">
+            <div class="login-language-toggle" role="group" aria-label="Language">
+              <button type="button" class="lang-switch active" data-lang="en">English</button>
+              <button type="button" class="lang-switch" data-lang="hi">हिंदी</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-content">
+          <div class="showcase-copy">
+            <div class="eyebrow"><i data-lucide="sparkles"></i> Intelligent Healthcare Ecosystem</div>
+            <h1>Connected care.<br><span>Smarter decisions.</span></h1>
+            <p>One secure workspace connecting hospital operations, medical education, specialist care and AI-assisted clinical workflows.</p>
+          </div>
+
+          <div class="clinical-visual">
+            <div class="visual-orb orb-one"></div>
+            <div class="visual-orb orb-two"></div>
+            <div class="care-panel main-panel">
+              <div class="mini-panel-head"><span>Live Care Overview</span><span class="live-dot"></span></div>
+              <div class="care-metrics">
+                <div><strong>24/7</strong><span>Digital Care</span></div>
+                <div><strong>AI</strong><span>Clinical Support</span></div>
+                <div><strong>Secure</strong><span>Audit Trail</span></div>
+              </div>
+              <svg class="ecg-line" viewBox="0 0 620 90" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 45 H95 L118 45 L137 15 L154 72 L171 45 H255 L278 45 L296 28 L311 58 L329 45 H420 L441 45 L458 20 L476 68 L494 45 H620" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="care-footer"><span><i data-lucide="shield-check"></i> Privacy-first workspace</span><span><i data-lucide="activity"></i> AI assisted</span></div>
+            </div>
+
+            <div class="floating-card doctor-float">
+              <div class="avatar-stack"><span>AS</span><span>KM</span><span>EV</span></div>
+              <div><strong>Specialists Online</strong><small>Global consultation network</small></div>
+            </div>
+
+            <div class="floating-card alert-float">
+              <i data-lucide="bell-ring"></i>
+              <div><strong>Doctor review</strong><small>AI case awaiting approval</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-footer">
+          <span><i data-lucide="lock-keyhole"></i> Role-based access</span>
+          <span><i data-lucide="link-2"></i> Audit-ready records</span>
+          <span><i data-lucide="video"></i> Remote consultations</span>
+        </div>
+      </div>
+
+      <div class="login-panel">
+        <div class="login-panel-top">
+          <div>
+            <span class="section-kicker">SECURE PORTAL ACCESS</span>
+            <h2>Welcome to CareFlow AI</h2>
+            <p class="login-ai-subtitle">AI Integrated Digital Healthcare, Medical College &amp; Hospital Management System</p>
+          </div>
+          <div class="login-utility-links"><button type="button" class="utility-text-btn" data-i18n="Help">? Help</button><button type="button" class="utility-text-btn" data-i18n="Accessibility">Accessibility</button></div>
+        </div>
+
+        <div class="portal-label-row">
+          <span>Select portal</span>
+          <small>Access follows your assigned role</small>
+        </div>
+
+        <div class="portal-grid" id="portal-grid">
+          <button type="button" class="portal-card selected chip" data-role="Chairman" data-email="chairman@careflow.com">
+            <span class="portal-icon chairman"><i data-lucide="crown"></i></span>
+            <span><strong>Chairman</strong><small>Executive Command</small></span>
+          </button>
+          <button type="button" class="portal-card chip" data-role="Hospital Administrator" data-email="admin@careflow.com">
+            <span class="portal-icon hospital"><i data-lucide="hospital"></i></span>
+            <span><strong>Hospital Admin</strong><small>Hospital Operations</small></span>
+          </button>
+          <button type="button" class="portal-card chip" data-role="College Administrator" data-email="college@careflow.com">
+            <span class="portal-icon college"><i data-lucide="graduation-cap"></i></span>
+            <span><strong>College Admin</strong><small>Academic Command</small></span>
+          </button>
+          <button type="button" class="portal-card chip" data-role="Hostel Administrator" data-email="hostel@careflow.com">
+            <span class="portal-icon hostel"><i data-lucide="building-2"></i></span>
+            <span><strong>Hostel Admin</strong><small>Hostel Operations</small></span>
+          </button>
+          <button type="button" class="portal-card chip" data-role="Doctor" data-email="doctor@careflow.com">
+            <span class="portal-icon doctor"><i data-lucide="stethoscope"></i></span>
+            <span><strong>Doctor</strong><small>Clinical Workspace</small></span>
+          </button>
+          <button type="button" class="portal-card chip" data-role="Patient" data-email="patient@careflow.com">
+            <span class="portal-icon patient"><i data-lucide="user-round"></i></span>
+            <span><strong>Patient</strong><small>Digital Care</small></span>
+          </button>
+        </div>
+
+        <form id="login-form" class="modern-login-form">
+          <div class="role-selector-wrap">
+            <label class="modern-field"><span>Role / Portal</span><div class="field-control"><span class="field-symbol">◈</span><select id="login-role">
+              <option>Chairman</option><option>Hospital Administrator</option><option>College Administrator</option><option>Hostel Administrator</option><option>Medical Director</option><option>Dean</option><option>HOD</option><option>Doctor</option><option>Nurse</option><option>Receptionist</option><option>Pharmacist</option><option>Lab Technician</option><option>Student</option><option>Patient</option>
+            </select></div></label>
+          </div>
+          <label class="modern-field">
+            <span>Email / User ID</span>
+            <div class="field-control"><i data-lucide="mail"></i><input id="login-email" type="email" value="chairman@careflow.com" placeholder="name@careflow.com" required></div>
+          </label>
+
+          <label class="modern-field">
+            <span>Password</span>
+            <div class="field-control"><i data-lucide="lock-keyhole"></i><input id="login-password" type="password" value="password" placeholder="Enter your password" required><button type="button" class="password-toggle" id="password-toggle" aria-label="Show password"><i data-lucide="eye"></i></button></div>
+          </label>
+
+          <div class="login-meta">
+            <label class="remember-option"><input type="checkbox" checked><span>Remember this device</span></label>
+            <button type="button" class="text-btn">Forgot password?</button>
+          </div>
+
+          <div id="login-error" class="alert-card danger hidden"><i data-lucide="alert-circle"></i><div><strong>Access denied</strong><p>Check your credentials and try again.</p></div></div>
+
+          <button class="btn btn-primary btn-block enter-btn" type="submit">
+            <span>Enter CareFlow</span><i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="security-strip">
+          <span><i data-lucide="shield-check"></i> Secure role-based access</span>
+          <span><i data-lucide="activity"></i> Systems ready</span>
+        </div>
+
+        <div class="login-bottom-links">
+          <span>CareFlow AI</span>
+          <span data-i18n="Privacy">Privacy</span>
+          <span data-i18n="Terms">Terms</span>
+          <span>Accessibility</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard-view" class="view-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><strong class="dashboard-brand-name">CareFlow <span>AI</span></strong></div>
+      <div class="user-card"><div class="avatar" id="user-avatar">C</div><div><strong id="user-name">Chairman Office</strong><span id="user-role">Chairman</span></div></div>
+      <nav id="sidebar-nav"></nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-block" id="logout-btn"><i data-lucide="log-out"></i> Sign out</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><h1 id="view-title">Chairman Command Center</h1><p id="view-subtitle">Executive oversight</p></div><div class="topbar-actions"><div class="app-language-toggle" role="group" aria-label="Language"><button type="button" class="lang-switch active" data-lang="en">English</button><button type="button" class="lang-switch" data-lang="hi">हिंदी</button></div><div class="global-search"><i data-lucide="search"></i><input id="global-search" placeholder="Search patients, doctors, students, records..."><div id="search-results" class="search-results hidden"></div></div><button class="icon-btn" id="notification-btn"><i data-lucide="bell"></i><span id="notification-count">0</span></button><div class="clock" id="live-time"></div></div></header>
+      <div id="content-body" class="content-body">
+        <section id="view-overview" class="view-section"></section>
+        <section id="view-hospital" class="view-section"></section>
+        <section id="view-college" class="view-section"></section>
+        <section id="view-hostel" class="view-section"></section>
+        <section id="view-departments" class="view-section"></section>
+        <section id="view-doctors" class="view-section"></section>
+        <section id="view-schedules" class="view-section"></section>
+        <section id="view-appointments" class="view-section"></section>
+        <section id="view-patients" class="view-section"></section>
+        <section id="view-ai" class="view-section"></section>
+        <section id="view-consultations" class="view-section"></section>
+        <section id="view-prescriptions" class="view-section"></section>
+        <section id="view-laboratory" class="view-section"></section>
+        <section id="view-pharmacy" class="view-section"></section>
+        <section id="view-billing" class="view-section"></section>
+        <section id="view-beds" class="view-section"></section>
+        <section id="view-operations" class="view-section"></section>
+        <section id="view-medical-college" class="view-section"></section>
+        <section id="view-hostel-management" class="view-section"></section>
+        <section id="view-reports" class="view-section"></section>
+        <section id="view-blockchain" class="view-section"></section>
+        <section id="view-users" class="view-section"></section>
+        <section id="view-settings" class="view-section"></section>
+        <section id="view-staff" class="view-section"></section>
+        <section id="view-finance" class="view-section"></section>
+        <section id="view-emergency" class="view-section"></section>
+        <section id="view-blood-bank" class="view-section"></section>
+        <section id="view-ambulance" class="view-section"></section>
+        <section id="view-consent" class="view-section"></section>
+        <section id="view-research" class="view-section"></section>
+      </div>
+    </main>
+  </section>
+</div>
+<script src="i18n.js"></script><script src="data/seed-data.js"></script><script src="ai-service.js"></script><script src="backend/api-client.js"></script><script src="app.js"></script><script src="expert-additions.js"></script><script src="phase3_additions.js"></script><script src="phase4_academic.js"></script><style>@import url("phase4_academic.css");</style>
+<script src="phase5_hostel.js"></script><style>@import url("phase5_hostel.css");</style>
+<script src="phase6_governance.js"></script><style>@import url("phase6_governance.css");</style>
+<script src="phase7_final.js"></script><style>@import url("phase7_final.css");</style>
+<script src="phase8_15.js"></script><style>@import url("phase8_15.css");</style>
+</body></html>

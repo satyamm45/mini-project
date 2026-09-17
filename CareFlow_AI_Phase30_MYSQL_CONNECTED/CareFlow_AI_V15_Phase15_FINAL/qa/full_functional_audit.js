@@ -1,0 +1,20 @@
+/* CareFlow AI Phase 8–15 runtime/static audit. Uses a deterministic DOM stub because the
+   execution environment blocks Chromium navigation to local loopback pages. */
+const fs=require('fs'),vm=require('vm');
+class El{constructor(id=''){this.id=id;this.innerHTML='';this.children=[];this.className='';this.value='';this.dataset={};this.style={};this.classList={add(){},remove(){}}}appendChild(x){this.children.push(x);if(x.id)D.map[x.id]=x;return x}querySelectorAll(){return[]}addEventListener(){}remove(){}}
+const D={map:{},listeners:{},getElementById(id){return this.map[id]||(this.map[id]=new El(id))},createElement(){return new El()},querySelectorAll(s){return s==='.view-section'?Object.values(this.map).filter(x=>x.className.includes('view-section')):[]},addEventListener(e,f){this.listeners[e]=f},body:new El('body')};
+['content-body','sidebar-nav','view-title','view-subtitle'].forEach(id=>D.map[id]=new El(id));
+const store={};const ls={getItem:k=>store[k]??null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k]};
+const data={patients:[{id:'PAT-1001',name:'Rahul Sharma'}],doctors:[{id:'DOC-101',name:'Dr. S. Mehta',status:'Available'}],appointments:[{id:'APT-001',patientId:'PAT-1001',doctorId:'DOC-101',status:'Confirmed'}],schedules:[{id:'SCH-1',doctorId:'DOC-101'}],leaves:[],consent:[{patientId:'PAT-1001'}],bloodBank:[{id:'B',units:10}],pharmacy:[{id:'M',stock:30}],beds:[{id:'ICU-02',status:'Available'}],emergencies:[{id:'EMG-001',status:'Active',priority:'Critical'}],billing:[{amount:100,status:'Paid'}],labs:[{status:'Pending'}],students:[{attendance:80}],prescriptions:[{id:'RX-59850'}],ambulances:[{id:'AMB-001',status:'Available'}],audit:[]};
+const core={state:{currentUser:{role:'Chairman',email:'chairman@careflow.com'},data},ROLE_CONFIG:{Chairman:{},Doctor:{},Student:{}},PERMISSIONS:{},makeId:p=>p+'-QA',esc:x=>String(x),addAudit:()=>Promise.resolve(),showModal:()=>{},closeModal:()=>{}};
+const context={console,window:{CareFlowCore:core,lucide:{createIcons(){}}},document:D,localStorage:ls,confirm:()=>true,alert:()=>{},setTimeout:(f)=>{f();return 1},clearTimeout(){},Date,Math,location:{hash:''}};context.globalThis=context.window;
+vm.runInNewContext(fs.readFileSync(require('path').join(__dirname,'..','phase8_15.js'),'utf8'),context,{filename:'phase8_15.js'});D.listeners.DOMContentLoaded();
+const names=['security','emergency-ops','diagnostic-ops','patient-journey','academic-plus','hostel-plus','intelligence','final-readiness'];
+for(const n of names){context.window.cf8xNavigate(n);if(D.getElementById('view-'+n).innerHTML.length<50)throw new Error('render failure: '+n);console.log('PASS render '+n)}
+const stores=['cf8x_security_events','cf8x_emergency_responses','cf8x_lab_orders','cf8x_dispenses','cf8x_care_episodes','cf8x_timetable','cf8x_attendance','cf8x_exams','cf8x_assignments','cf8x_skills','cf8x_hostel_assets','cf8x_ai_insights'];
+if(!stores.every(k=>Array.isArray(JSON.parse(store[k]))))throw new Error('store seed failure');console.log('PASS all phase stores seeded');
+core.state.currentUser.role='Student';let before=JSON.parse(store.cf8x_hostel_assets).length;context.window.cfAddHA();if(JSON.parse(store.cf8x_hostel_assets).length!==before)throw new Error('hostel RBAC failure');console.log('PASS hostel RBAC');
+before=JSON.parse(store.cf8x_attendance).length;context.window.cfAddA('attendance');if(JSON.parse(store.cf8x_attendance).length!==before)throw new Error('academic RBAC failure');console.log('PASS academic RBAC');
+before=JSON.parse(store.cf8x_dispenses).length;context.window.cfAddD();if(JSON.parse(store.cf8x_dispenses).length!==before)throw new Error('pharmacy RBAC failure');console.log('PASS pharmacy RBAC');
+const d=data;if(!d.appointments.every(x=>!x.doctorId||d.doctors.some(y=>y.id===x.doctorId)))throw new Error('appointment doctor reference failure');if(!d.appointments.every(x=>!x.patientId||d.patients.some(y=>y.id===x.patientId)))throw new Error('appointment patient reference failure');console.log('PASS cross-module references');
+console.log('FULL_FUNCTIONAL_AUDIT_PHASE8_15_PASS');
